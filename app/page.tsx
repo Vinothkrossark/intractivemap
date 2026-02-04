@@ -3,7 +3,6 @@
 import { USMap } from "@/components/Map/USMap";
 import { DesktopSidebar } from "@/components/Sidebar/DesktopSidebar";
 import { MobileSidebar } from "@/components/Sidebar/MobileSidebar";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Header } from "@/components/Header";
 import { useThemeStore } from "@/stores/themeStore";
 import { useMapStore } from "@/stores/mapStore";
@@ -20,11 +19,8 @@ export default function HomePage() {
         ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
         : "bg-gradient-to-br from-slate-50 via-gray-50 to-stone-50"
     }`}>
-      {/* Header with Logo and Org Chart Links */}
+      {/* Header with Logo, Org Chart Links, and Theme Toggle */}
       <Header />
-
-      {/* Theme Toggle Button */}
-      <ThemeToggle />
 
       {/* Desktop Sidebar */}
       <DesktopSidebar />
