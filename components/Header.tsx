@@ -45,7 +45,7 @@ export function Header() {
         <div className="flex items-center mr-16">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/rosendin-logo.png"
+            src="/images/rosendin-logo.png"
             alt="Rosendin"
             className="h-10 w-auto object-contain"
             onError={(e) => {

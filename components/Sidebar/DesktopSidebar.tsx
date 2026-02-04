@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import { useMapStore } from "@/stores/mapStore";
 import { useThemeStore } from "@/stores/themeStore";
@@ -8,7 +7,6 @@ import { MAP_CONFIG, LAYER_CONFIG } from "@/data/map-config";
 import type { LayerType } from "@/types";
 
 export function DesktopSidebar() {
-  const router = useRouter();
   const { selectedState, setSelectedState } = useMapStore();
   const { theme } = useThemeStore();
 
@@ -39,7 +37,7 @@ export function DesktopSidebar() {
           file: resource.url,
           title: resource.title || "Excel Viewer",
         });
-        router.push(`/viewer/excel?${params.toString()}`);
+        window.open(`/viewer/excel?${params.toString()}`, "_blank", "noopener,noreferrer");
       }
     } else if (resource.type === "placeholder") {
       alert(resource.message || "Resource coming soon");

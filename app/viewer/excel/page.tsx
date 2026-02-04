@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, Download, FileSpreadsheet, Loader2 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { X, Download, FileSpreadsheet, Loader2 } from "lucide-react";
 import * as XLSX from "xlsx";
 import { useThemeStore } from "@/stores/themeStore";
 
@@ -13,7 +13,6 @@ interface SheetData {
 
 function ExcelViewerContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const { theme } = useThemeStore();
   const isDark = theme === "dark";
 
@@ -81,12 +80,13 @@ function ExcelViewerContent() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
-                onClick={() => router.back()}
+                onClick={() => window.close()}
                 className={`p-2 rounded-lg transition-colors ${
                   isDark ? "hover:bg-gray-700 text-gray-300" : "hover:bg-gray-100 text-gray-600"
                 }`}
+                title="Close tab"
               >
-                <ArrowLeft className="w-5 h-5" />
+                <X className="w-5 h-5" />
               </button>
               <div className="flex items-center gap-3">
                 <FileSpreadsheet className={`w-6 h-6 ${isDark ? "text-emerald-400" : "text-emerald-600"}`} />
@@ -148,12 +148,12 @@ function ExcelViewerContent() {
               <p>{error}</p>
             </div>
             <button
-              onClick={() => router.back()}
+              onClick={() => window.close()}
               className={`mt-4 px-4 py-2 rounded-lg ${
                 isDark ? "bg-gray-700 text-white hover:bg-gray-600" : "bg-gray-200 text-gray-800 hover:bg-gray-300"
               }`}
             >
-              Go Back
+              Close Tab
             </button>
           </div>
         )}
