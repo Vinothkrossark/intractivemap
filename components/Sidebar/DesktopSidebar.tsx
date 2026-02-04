@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import { useMapStore } from "@/stores/mapStore";
 import { useThemeStore } from "@/stores/themeStore";
@@ -7,6 +8,7 @@ import { MAP_CONFIG, LAYER_CONFIG } from "@/data/map-config";
 import type { LayerType } from "@/types";
 
 export function DesktopSidebar() {
+  const router = useRouter();
   const { selectedState, setSelectedState } = useMapStore();
   const { theme } = useThemeStore();
 
@@ -31,6 +33,14 @@ export function DesktopSidebar() {
       if (resource.url) {
         window.open(resource.url, "_blank", "noopener,noreferrer");
       }
+    } else if (resource.type === "excel-viewer") {
+      if (resource.url) {
+        const params = new URLSearchParams({
+          file: resource.url,
+          title: resource.title || "Excel Viewer",
+        });
+        router.push(`/viewer/excel?${params.toString()}`);
+      }
     } else if (resource.type === "placeholder") {
       alert(resource.message || "Resource coming soon");
     }
@@ -41,89 +51,87 @@ export function DesktopSidebar() {
   };
 
   return (
-    <aside className={`hidden lg:block w-80 min-h-screen sticky top-0 border-r p-6 animate-slide-in shadow-lg ${
+    <aside className={`hidden lg:block w-72 h-[calc(100vh-3.5rem)] fixed top-14 left-0 border-r p-5 overflow-y-auto z-30 ${
       isDark
-        ? "bg-gray-800 border-gray-700"
-        : "bg-white border-gray-200"
-    }`}>
+        ? "bg-gray-800/95 border-gray-700/50"
+        : "bg-white/95 border-gray-200/50"
+    } backdrop-blur-sm`}>
       {/* Header with Close Button */}
-      <div className="flex items-start justify-between mb-6">
+      <div className="flex items-start justify-between mb-4">
         <div>
-          <h2 className={`text-xl font-semibold mb-2 ${isDark ? "text-white" : "text-gray-800"}`}>
+          <p className={`text-xs uppercase tracking-wider font-medium ${isDark ? "text-gray-400" : "text-gray-500"}`}>
             Data Layers
-          </h2>
-          <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-            Click a layer to open resource
           </p>
         </div>
         <button
           onClick={handleClose}
-          className={`p-2 rounded-lg transition-colors ${
-            isDark ? "hover:bg-gray-700" : "hover:bg-gray-100"
+          className={`p-1.5 rounded-full transition-colors ${
+            isDark ? "hover:bg-gray-700" : "hover:bg-gray-200"
           }`}
           aria-label="Close sidebar"
         >
-          <X className={`w-5 h-5 ${isDark ? "text-gray-400" : "text-gray-600"}`} />
+          <X className={`w-4 h-4 ${isDark ? "text-gray-400" : "text-gray-500"}`} />
         </button>
       </div>
 
       {/* Selected State Badge */}
-      <div className={`mb-6 p-4 border rounded-lg ${
+      <div className={`mb-5 p-3 rounded-xl ${
         isDark
-          ? "bg-amber-900/20 border-amber-700/50"
-          : "bg-amber-50 border-amber-200"
+          ? "bg-amber-500/10 border border-amber-500/20"
+          : "bg-amber-50 border border-amber-100"
       }`}>
-        <p className={`text-xs uppercase tracking-wider mb-1 ${
-          isDark ? "text-amber-400" : "text-amber-700"
+        <p className={`text-[10px] uppercase tracking-wider mb-0.5 ${
+          isDark ? "text-amber-400/80" : "text-amber-600"
         }`}>
           Selected State
         </p>
-        <p className={`font-semibold text-lg ${isDark ? "text-white" : "text-gray-800"}`}>
+        <p className={`font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>
           {stateData.name} ({selectedState})
         </p>
       </div>
 
       {/* Layer Options - Click to Open */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {Object.values(LAYER_CONFIG).map((layer) => {
           const resource = stateData.resources[layer.id];
-          const hasResource = resource && (resource.type === "pdf" || resource.type === "external-link");
+          const hasResource = resource && (resource.type === "pdf" || resource.type === "external-link" || resource.type === "excel-viewer");
 
           return (
             <button
               key={layer.id}
               onClick={() => handleLayerClick(layer.id)}
-              className={`w-full flex items-center gap-3 p-4 rounded-lg transition-all text-left ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-left ${
                 hasResource
                   ? isDark
-                    ? "bg-gray-700 hover:bg-amber-900/30 hover:border-amber-600 border border-gray-600 cursor-pointer shadow-sm hover:shadow"
-                    : "bg-white hover:bg-amber-50 hover:border-amber-300 border border-gray-200 cursor-pointer shadow-sm hover:shadow"
-                  : isDark
-                    ? "bg-gray-900/50 border border-gray-700 cursor-not-allowed opacity-60"
-                    : "bg-gray-50 border border-gray-200 cursor-not-allowed opacity-60"
+                    ? "hover:bg-gray-700/80 cursor-pointer"
+                    : "hover:bg-gray-100 cursor-pointer"
+                  : "cursor-not-allowed opacity-50"
               }`}
             >
-              <div className={`text-2xl ${hasResource ? "text-amber-500" : isDark ? "text-gray-600" : "text-gray-400"}`}>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-lg ${
+                hasResource
+                  ? isDark ? "bg-amber-500/20" : "bg-amber-100"
+                  : isDark ? "bg-gray-700" : "bg-gray-100"
+              }`}>
                 {hasResource ? "📄" : "🔒"}
               </div>
-              <div className="flex-1">
-                <p className={`font-medium ${
+              <div className="flex-1 min-w-0">
+                <p className={`font-medium text-sm truncate ${
                   hasResource
                     ? isDark ? "text-white" : "text-gray-800"
-                    : isDark ? "text-gray-600" : "text-gray-400"
+                    : isDark ? "text-gray-500" : "text-gray-400"
                 }`}>
                   {layer.label}
                 </p>
-                {resource && (
-                  <p className={`text-xs mt-1 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-                    {resource.type === "pdf" ? "PDF Document" :
-                     resource.type === "external-link" ? "External Link" :
-                     "Coming Soon"}
-                  </p>
-                )}
+                <p className={`text-[11px] ${isDark ? "text-gray-500" : "text-gray-400"}`}>
+                  {resource?.type === "pdf" ? "PDF" :
+                   resource?.type === "external-link" ? "Link" :
+                   resource?.type === "excel-viewer" ? "Excel" :
+                   "Coming Soon"}
+                </p>
               </div>
               {hasResource && (
-                <span className="text-amber-500 text-sm">→</span>
+                <span className={`text-xs ${isDark ? "text-gray-500" : "text-gray-400"}`}>→</span>
               )}
             </button>
           );
@@ -131,9 +139,9 @@ export function DesktopSidebar() {
       </div>
 
       {/* Footer Info */}
-      <div className={`mt-8 pt-6 border-t ${isDark ? "border-gray-700" : "border-gray-200"}`}>
-        <p className={`text-xs ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-          Click on a data layer to open the resource in a new tab.
+      <div className={`mt-6 pt-4 border-t ${isDark ? "border-gray-700/50" : "border-gray-200/50"}`}>
+        <p className={`text-[11px] ${isDark ? "text-gray-500" : "text-gray-400"}`}>
+          Click a layer to open in new tab
         </p>
       </div>
     </aside>

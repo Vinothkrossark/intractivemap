@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -6,9 +6,14 @@ export const metadata: Metadata = {
   description:
     "Interactive map of the United States with state-specific resources for IBEW districts, NECA chapters, and more.",
   keywords: ["US Map", "IBEW", "NECA", "Interactive Map", "State Resources"],
-  authors: [{ name: "Your Organization" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
-  themeColor: "#0f1429",
+  authors: [{ name: "Rosendin" }],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#f9fafb",
 };
 
 export default function RootLayout({

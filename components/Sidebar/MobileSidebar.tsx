@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import { useMapStore } from "@/stores/mapStore";
 import { useThemeStore } from "@/stores/themeStore";
@@ -8,6 +8,7 @@ import { MAP_CONFIG, LAYER_CONFIG } from "@/data/map-config";
 import type { LayerType } from "@/types";
 
 export function MobileSidebar() {
+  const router = useRouter();
   const { selectedState, setSelectedState } = useMapStore();
   const { theme } = useThemeStore();
 
@@ -36,6 +37,14 @@ export function MobileSidebar() {
     if (resource.type === "pdf" || resource.type === "external-link") {
       if (resource.url) {
         window.open(resource.url, "_blank", "noopener,noreferrer");
+      }
+    } else if (resource.type === "excel-viewer") {
+      if (resource.url) {
+        const params = new URLSearchParams({
+          file: resource.url,
+          title: resource.title || "Excel Viewer",
+        });
+        router.push(`/viewer/excel?${params.toString()}`);
       }
     } else if (resource.type === "placeholder") {
       alert(resource.message || "Resource coming soon");
@@ -103,7 +112,7 @@ export function MobileSidebar() {
         <div className="space-y-3">
           {Object.values(LAYER_CONFIG).map((layer) => {
             const resource = stateData.resources[layer.id];
-            const hasResource = resource && (resource.type === "pdf" || resource.type === "external-link");
+            const hasResource = resource && (resource.type === "pdf" || resource.type === "external-link" || resource.type === "excel-viewer");
 
             return (
               <button
@@ -134,6 +143,7 @@ export function MobileSidebar() {
                     <p className={`text-xs mt-1 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
                       {resource.type === "pdf" ? "PDF Document" :
                        resource.type === "external-link" ? "External Link" :
+                       resource.type === "excel-viewer" ? "Excel Spreadsheet" :
                        "Coming Soon"}
                     </p>
                   )}

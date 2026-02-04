@@ -41,6 +41,17 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Hide scrollbar by default but keep functionality */
+  html {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 }
 

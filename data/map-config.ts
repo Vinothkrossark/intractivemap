@@ -25,35 +25,35 @@ const createPlaceholderState = (code: StateCode): StateConfig => ({
       title: "IBEW Districts",
       message: `IBEW Districts coming soon for ${STATE_NAMES[code]}`,
     },
-    ibewRosendinContacts: {
-      id: `${code.toLowerCase()}-ibew-rosendin-1`,
-      type: "placeholder",
-      title: "IBEW Rosendin Contacts",
-      message: `IBEW Rosendin Contacts coming soon for ${STATE_NAMES[code]}`,
-    },
     necaChapters: {
       id: `${code.toLowerCase()}-neca-1`,
       type: "placeholder",
       title: "NECA Chapters",
       message: `NECA Chapters coming soon for ${STATE_NAMES[code]}`,
     },
-    necaRosendinContacts: {
-      id: `${code.toLowerCase()}-neca-rosendin-1`,
+    licenses: {
+      id: `${code.toLowerCase()}-licenses-1`,
       type: "placeholder",
-      title: "NECA Rosendin Contacts",
-      message: `NECA Rosendin Contacts coming soon for ${STATE_NAMES[code]}`,
+      title: "Licenses",
+      message: `License information coming soon for ${STATE_NAMES[code]}`,
+    },
+    activeParticipantList: {
+      id: `${code.toLowerCase()}-participant-1`,
+      type: "excel-viewer",
+      title: "NECA - IBEW Rosendin Contacts",
+      url: "/documents/NECA - IBEW Rosendin Contacts.xlsx",
+    },
+    cbasMous: {
+      id: `${code.toLowerCase()}-cbas-1`,
+      type: "placeholder",
+      title: "CBAs and MOUs",
+      message: `CBAs and MOUs coming soon for ${STATE_NAMES[code]}`,
     },
     activeProjects: {
       id: `${code.toLowerCase()}-projects-1`,
       type: "placeholder",
       title: "Active Projects",
       message: `Active Projects coming soon for ${STATE_NAMES[code]}`,
-    },
-    license: {
-      id: `${code.toLowerCase()}-license-1`,
-      type: "placeholder",
-      title: "License Information",
-      message: `License information coming soon for ${STATE_NAMES[code]}`,
     },
   },
 });
@@ -67,26 +67,32 @@ export const MAP_CONFIG: Record<StateCode, StateConfig> = {
       ibewDistricts: {
         id: "ca-ibew-1",
         type: "pdf",
-        title: "IBEW California Districts",
+        title: "IBEW Districts",
         url: "https://ibew.org/wp-content/uploads/2024/10/CA_Inside_Final.pdf",
       },
       necaChapters: {
         id: "ca-neca-1",
         type: "external-link",
-        title: "NECA California Chapters",
-        url: "https://www.necanet.org/find-a-local-chapter?pg=1&searchWithin=california",
+        title: "NECA Chapters",
+        url: "https://www.necanet.org/find-a-local-chapter?pg=1&chapterregions=Western%20Region&addressstate=California",
       },
-      ibewRosendinContacts: {
-        id: "ca-ibew-rosendin-1",
+      licenses: {
+        id: "ca-licenses-1",
         type: "placeholder",
-        title: "IBEW Rosendin Contacts",
-        message: "IBEW Rosendin Contacts coming soon for California",
+        title: "Licenses",
+        message: "License information coming soon for California",
       },
-      necaRosendinContacts: {
-        id: "ca-neca-rosendin-1",
+      activeParticipantList: {
+        id: "ca-participant-1",
+        type: "excel-viewer",
+        title: "NECA - IBEW Rosendin Contacts",
+        url: "/documents/NECA - IBEW Rosendin Contacts.xlsx",
+      },
+      cbasMous: {
+        id: "ca-cbas-1",
         type: "placeholder",
-        title: "NECA Rosendin Contacts",
-        message: "NECA Rosendin Contacts coming soon for California",
+        title: "CBAs and MOUs",
+        message: "CBAs and MOUs coming soon for California (Shared file location TBD)",
       },
       activeProjects: {
         id: "ca-projects-1",
@@ -94,97 +100,48 @@ export const MAP_CONFIG: Record<StateCode, StateConfig> = {
         title: "Active Projects",
         message: "Active Projects coming soon for California",
       },
-      license: {
-        id: "ca-license-1",
-        type: "placeholder",
-        title: "License Information",
-        message: "License information coming soon for California",
-      },
     },
   },
 
-  NY: {
-    code: "NY",
-    name: "New York",
+  VA: {
+    code: "VA",
+    name: "Virginia",
     resources: {
       ibewDistricts: {
-        id: "ny-ibew-1",
+        id: "va-ibew-1",
         type: "pdf",
-        title: "IBEW New York Districts",
-        url: "https://ibew.org/wp-content/uploads/2024/10/NY_Inside_Final.pdf",
+        title: "IBEW Districts",
+        url: "https://ibew.org/wp-content/uploads/2024/10/VA_Inside_Final.pdf",
       },
       necaChapters: {
-        id: "ny-neca-1",
+        id: "va-neca-1",
         type: "external-link",
-        title: "NECA New York Chapters",
-        url: "https://www.necanet.org/find-a-local-chapter?pg=1&searchWithin=new-york",
+        title: "NECA Chapters",
+        url: "https://www.necanet.org/find-a-local-chapter?pg=1&addressstate=Virginia",
       },
-      ibewRosendinContacts: {
-        id: "ny-ibew-rosendin-1",
+      licenses: {
+        id: "va-licenses-1",
         type: "placeholder",
-        title: "IBEW Rosendin Contacts",
-        message: "IBEW Rosendin Contacts coming soon for New York",
+        title: "Licenses",
+        message: "License information coming soon for Virginia",
       },
-      necaRosendinContacts: {
-        id: "ny-neca-rosendin-1",
+      activeParticipantList: {
+        id: "va-participant-1",
+        type: "excel-viewer",
+        title: "NECA - IBEW Rosendin Contacts",
+        url: "/documents/NECA - IBEW Rosendin Contacts.xlsx",
+      },
+      cbasMous: {
+        id: "va-cbas-1",
         type: "placeholder",
-        title: "NECA Rosendin Contacts",
-        message: "NECA Rosendin Contacts coming soon for New York",
+        title: "CBAs and MOUs",
+        message: "CBAs and MOUs coming soon for Virginia (Shared file location TBD)",
       },
       activeProjects: {
-        id: "ny-projects-1",
+        id: "va-projects-1",
         type: "placeholder",
         title: "Active Projects",
-        message: "Active Projects coming soon for New York",
-      },
-      license: {
-        id: "ny-license-1",
-        type: "placeholder",
-        title: "License Information",
-        message: "License information coming soon for New York",
-      },
-    },
-  },
-
-  TX: {
-    code: "TX",
-    name: "Texas",
-    resources: {
-      ibewDistricts: {
-        id: "tx-ibew-1",
-        type: "pdf",
-        title: "IBEW Texas Districts",
-        url: "https://ibew.org/wp-content/uploads/2024/10/TX_Inside_Final.pdf",
-      },
-      necaChapters: {
-        id: "tx-neca-1",
-        type: "external-link",
-        title: "NECA Texas Chapters",
-        url: "https://www.necanet.org/find-a-local-chapter?pg=1&searchWithin=texas",
-      },
-      ibewRosendinContacts: {
-        id: "tx-ibew-rosendin-1",
-        type: "placeholder",
-        title: "IBEW Rosendin Contacts",
-        message: "IBEW Rosendin Contacts coming soon for Texas",
-      },
-      necaRosendinContacts: {
-        id: "tx-neca-rosendin-1",
-        type: "placeholder",
-        title: "NECA Rosendin Contacts",
-        message: "NECA Rosendin Contacts coming soon for Texas",
-      },
-      activeProjects: {
-        id: "tx-projects-1",
-        type: "placeholder",
-        title: "Active Projects",
-        message: "Active Projects coming soon for Texas",
-      },
-      license: {
-        id: "tx-license-1",
-        type: "placeholder",
-        title: "License Information",
-        message: "License information coming soon for Texas",
+        message: "Active Projects coming soon for Virginia",
       },
     },
   },
@@ -220,6 +177,7 @@ export const MAP_CONFIG: Record<StateCode, StateConfig> = {
   NH: createPlaceholderState("NH"),
   NJ: createPlaceholderState("NJ"),
   NM: createPlaceholderState("NM"),
+  NY: createPlaceholderState("NY"),
   NC: createPlaceholderState("NC"),
   ND: createPlaceholderState("ND"),
   OH: createPlaceholderState("OH"),
@@ -230,9 +188,9 @@ export const MAP_CONFIG: Record<StateCode, StateConfig> = {
   SC: createPlaceholderState("SC"),
   SD: createPlaceholderState("SD"),
   TN: createPlaceholderState("TN"),
+  TX: createPlaceholderState("TX"),
   UT: createPlaceholderState("UT"),
   VT: createPlaceholderState("VT"),
-  VA: createPlaceholderState("VA"),
   WA: createPlaceholderState("WA"),
   WV: createPlaceholderState("WV"),
   WI: createPlaceholderState("WI"),
@@ -243,29 +201,36 @@ export const MAP_CONFIG: Record<StateCode, StateConfig> = {
 export const LAYER_CONFIG: Record<string, LayerConfig> = {
   ibewDistricts: {
     id: "ibewDistricts",
-    label: "IBEW districts",
+    label: "IBEW Districts",
     icon: "Building2",
     defaultChecked: true,
     color: "gold",
   },
-  ibewRosendinContacts: {
-    id: "ibewRosendinContacts",
-    label: "IBEW Rosendin Contacts",
-    icon: "Users",
-    defaultChecked: false,
-    color: "blue",
-  },
   necaChapters: {
     id: "necaChapters",
-    label: "NECA chapters",
+    label: "NECA Chapters",
     icon: "Building",
     defaultChecked: false,
     color: "cyan",
   },
-  necaRosendinContacts: {
-    id: "necaRosendinContacts",
-    label: "NECA Rosendin Contacts",
-    icon: "UserCircle",
+  licenses: {
+    id: "licenses",
+    label: "Licenses",
+    icon: "FileText",
+    defaultChecked: false,
+    color: "orange",
+  },
+  activeParticipantList: {
+    id: "activeParticipantList",
+    label: "Active Participant List",
+    icon: "Users",
+    defaultChecked: false,
+    color: "blue",
+  },
+  cbasMous: {
+    id: "cbasMous",
+    label: "CBAs and MOUs",
+    icon: "FileStack",
     defaultChecked: false,
     color: "emerald",
   },
@@ -275,13 +240,6 @@ export const LAYER_CONFIG: Record<string, LayerConfig> = {
     icon: "FolderKanban",
     defaultChecked: false,
     color: "purple",
-  },
-  license: {
-    id: "license",
-    label: "License",
-    icon: "FileText",
-    defaultChecked: false,
-    color: "orange",
   },
 };
 
@@ -296,7 +254,7 @@ export const hasRealResources = (stateCode: StateCode): boolean => {
   if (!state) return false;
 
   return Object.values(state.resources).some(
-    (resource) => resource && (resource.type === "pdf" || resource.type === "external-link")
+    (resource) => resource && (resource.type === "pdf" || resource.type === "external-link" || resource.type === "excel-viewer")
   );
 };
 

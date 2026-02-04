@@ -10,10 +10,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className={`fixed top-6 right-6 z-50 p-3 rounded-full shadow-lg transition-all ${
+      className={`fixed top-3 right-4 z-50 p-2 rounded-full transition-all ${
         isDark
-          ? "bg-gray-700 hover:bg-gray-600 text-amber-400"
-          : "bg-white hover:bg-gray-50 text-gray-800"
+          ? "hover:bg-gray-700 text-gray-400 hover:text-amber-400"
+          : "hover:bg-gray-200 text-gray-500 hover:text-gray-800"
       }`}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       title={`Switch to ${isDark ? "light" : "dark"} mode`}

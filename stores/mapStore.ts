@@ -12,11 +12,11 @@ interface MapState {
 
 const DEFAULT_LAYERS: Record<LayerType, boolean> = {
   ibewDistricts: true, // Default checked
-  ibewRosendinContacts: false,
   necaChapters: false,
-  necaRosendinContacts: false,
+  licenses: false,
+  activeParticipantList: false,
+  cbasMous: false,
   activeProjects: false,
-  license: false,
 };
 
 export const useMapStore = create<MapState>()(

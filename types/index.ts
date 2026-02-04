@@ -9,14 +9,14 @@ export type StateCode =
 // Layer/checkbox types
 export type LayerType =
   | "ibewDistricts"
-  | "ibewRosendinContacts"
   | "necaChapters"
-  | "necaRosendinContacts"
-  | "activeProjects"
-  | "license";
+  | "licenses"
+  | "activeParticipantList"
+  | "cbasMous"
+  | "activeProjects";
 
 // Resource types
-export type ResourceType = "pdf" | "external-link" | "placeholder";
+export type ResourceType = "pdf" | "external-link" | "excel-viewer" | "placeholder";
 
 // Resource interface
 export interface Resource {
